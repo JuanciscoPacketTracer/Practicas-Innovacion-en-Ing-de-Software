@@ -89,7 +89,7 @@
             // 
             // tbDestinatario
             // 
-            this.tbDestinatario.Location = new System.Drawing.Point(29, 162);
+            this.tbDestinatario.Location = new System.Drawing.Point(29, 160);
             this.tbDestinatario.Name = "tbDestinatario";
             this.tbDestinatario.Size = new System.Drawing.Size(284, 26);
             this.tbDestinatario.TabIndex = 6;
@@ -105,16 +105,16 @@
             // 
             // tbMensaje
             // 
-            this.tbMensaje.Location = new System.Drawing.Point(112, 293);
+            this.tbMensaje.Location = new System.Drawing.Point(29, 293);
             this.tbMensaje.Multiline = true;
             this.tbMensaje.Name = "tbMensaje";
-            this.tbMensaje.Size = new System.Drawing.Size(490, 181);
+            this.tbMensaje.Size = new System.Drawing.Size(573, 181);
             this.tbMensaje.TabIndex = 8;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 296);
+            this.label4.Location = new System.Drawing.Point(25, 262);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 19);
             this.label4.TabIndex = 7;
@@ -124,7 +124,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 235);
+            this.label5.Location = new System.Drawing.Point(25, 189);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 19);
             this.label5.TabIndex = 9;
@@ -132,9 +132,9 @@
             // 
             // tbAsunto
             // 
-            this.tbAsunto.Location = new System.Drawing.Point(112, 235);
+            this.tbAsunto.Location = new System.Drawing.Point(29, 222);
             this.tbAsunto.Name = "tbAsunto";
-            this.tbAsunto.Size = new System.Drawing.Size(490, 26);
+            this.tbAsunto.Size = new System.Drawing.Size(573, 26);
             this.tbAsunto.TabIndex = 10;
             // 
             // btnArchivo

@@ -20,9 +20,43 @@ namespace Practica_ETL
         private int totalPages = 0;
         private readonly string connStr = "Server=127.0.0.1;Uid=root;Pwd=rootroot;Database=bdpractica;";
 
+        private Color colorFondo = Color.FromArgb(30, 30, 46);
+        private Color colorBoton = Color.FromArgb(137, 180, 250);
+        private Color colorBotonHover = Color.FromArgb(116, 199, 236);
+        private Color colorTexto = Color.White;
+        private Color colorTextoBoton = Color.FromArgb(30, 30, 46);
+        private Font fuenteTitulo = new Font("Times New Roman", 18, FontStyle.Bold);
+        private Font fuenteBoton = new Font("Times New Roman", 18, FontStyle.Bold);
+
         public frmETL()
         {
             InitializeComponent();
+            AplicarEstilo();
+        }
+
+        private void EstilizarBoton(System.Windows.Forms.Button btn, string texto)
+        {
+            btn.FlatStyle = FlatStyle.Flat;                    // Quita el estilo 3D de Windows
+            btn.FlatAppearance.BorderSize = 0;                 // Sin borde
+            btn.BackColor = colorBoton;                        // Color de fondo
+            btn.ForeColor = colorTextoBoton;                   // Color del texto
+            btn.Text = texto;
+            btn.Cursor = Cursors.Hand;                         // Manita al pasar el mouse
+            btn.MouseEnter += (s, e) => btn.BackColor = colorBotonHover;
+            btn.MouseLeave += (s, e) => btn.BackColor = colorBoton;
+        }
+        private void AplicarEstilo()
+        {
+            this.BackColor = colorFondo;
+            this.Text = "Menú Principal";
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            EstilizarBoton(btnBuscar, "🔍  Buscar ");
+            EstilizarBoton(btnLimpiar, "🧹  Limpiar base de datos");
+            EstilizarBoton(btnNext, "▶️");
+            EstilizarBoton(btnPrev, "◀️");
+            EstilizarBoton(btnProceso, "⚙️ Proceso");
         }
         private async Task<int> GetTotalRowsAsync()
         {

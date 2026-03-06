@@ -73,7 +73,7 @@
             this.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProceso.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProceso.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.btnProceso.Location = new System.Drawing.Point(342, 483);
+            this.btnProceso.Location = new System.Drawing.Point(332, 447);
             this.btnProceso.Margin = new System.Windows.Forms.Padding(4);
             this.btnProceso.Name = "btnProceso";
             this.btnProceso.Size = new System.Drawing.Size(112, 34);
@@ -160,7 +160,7 @@
             this.btnLimpiar.UseVisualStyleBackColor = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // Form1
+            // frmETL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -177,7 +177,7 @@
             this.Controls.Add(this.btnBuscar);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
+            this.Name = "frmETL";
             this.Text = "Practica ETL";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
