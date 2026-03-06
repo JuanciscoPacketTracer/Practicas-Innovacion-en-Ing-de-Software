@@ -26,33 +26,6 @@ namespace Practica_ETL
             AplicarEstilo();
         }
 
-        private void EstilizarBoton(Button btn, string texto)
-        {
-            btn.FlatStyle = FlatStyle.Flat;                    // Quita el estilo 3D de Windows
-            btn.FlatAppearance.BorderSize = 0;                 // Sin borde
-            btn.BackColor = colorBoton;                        // Color de fondo
-            btn.ForeColor = colorTextoBoton;                   // Color del texto
-            btn.Font = fuenteBoton;                            // Fuente moderna
-            btn.Text = texto;
-            btn.Cursor = Cursors.Hand;                         // Manita al pasar el mouse
-            btn.MouseEnter += (s, e) => btn.BackColor = colorBotonHover;
-            btn.MouseLeave += (s, e) => btn.BackColor = colorBoton;
-        }
-        private void AplicarEstilo()
-        {
-            this.BackColor = colorFondo;
-            this.Text = "Menú Principal";
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            EstilizarBoton(btnETL, "📊  Proceso ETL");
-            EstilizarBoton(tbEnviarCorreos, "📧  Enviar Correos");
-            EstilizarBoton(btnFrame, "📷  Captura de Frame");
-            lblTitulo.Font = fuenteTitulo;
-            lblTitulo.ForeColor = colorTexto;
-            lblTitulo.AutoSize = true; 
-        }
-
         private void btnFrame_Click(object sender, EventArgs e)
         {
             frmFrame frame = new frmFrame();
@@ -63,17 +36,6 @@ namespace Practica_ETL
         {
             frmCorreo correo = new frmCorreo();
             correo.Show();
-        }
-
-        private void frmMenu_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnETL_Click(object sender, EventArgs e)
-        {
-            frmETL ETL = new frmETL();
-            ETL.Show();
         }
     }
 }
