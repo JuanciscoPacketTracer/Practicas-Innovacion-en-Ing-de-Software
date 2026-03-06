@@ -2,6 +2,7 @@
 {
     partial class frmMenu
     {
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -77,6 +78,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMenu";
             this.Text = "Menu";
+            this.Load += new System.EventHandler(this.frmMenu_Load);
             this.ResumeLayout(false);
 
         }
