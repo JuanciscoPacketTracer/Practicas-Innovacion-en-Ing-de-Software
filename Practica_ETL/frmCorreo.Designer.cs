@@ -59,7 +59,6 @@
             this.tbCorreo.Name = "tbCorreo";
             this.tbCorreo.Size = new System.Drawing.Size(284, 26);
             this.tbCorreo.TabIndex = 1;
-            this.tbCorreo.Text = "juanhdzcam11@gmail.com";
             // 
             // btnEnviar
             // 
@@ -78,7 +77,6 @@
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(248, 26);
             this.tbPassword.TabIndex = 4;
-            this.tbPassword.Text = "fkquwivsfpyjiqsh";
             // 
             // label2
             // 
