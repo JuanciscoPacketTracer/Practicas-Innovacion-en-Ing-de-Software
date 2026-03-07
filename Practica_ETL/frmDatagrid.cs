@@ -13,9 +13,18 @@ namespace Practica_ETL
 {
     public partial class frmDatagrid : Form
     {
+        private void AplicarEstilo()
+        {
+            this.BackColor = Estilos.Fondo;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            Estilos.Fondo = this.BackColor;
+            Estilos.EstilizarDataGridView(dgv: dataGridView1);
+
+        }
         public frmDatagrid()
         {
             InitializeComponent();
+            AplicarEstilo();
         }
         public void llenarDTG()
         {

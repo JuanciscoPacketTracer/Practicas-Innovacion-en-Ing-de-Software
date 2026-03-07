@@ -15,58 +15,31 @@ namespace Practica_ETL
 {
     public partial class frmCorreo : Form
     {
-        private Color colorFondo = Color.FromArgb(30, 30, 46);
-        private Color colorBoton = Color.FromArgb(137, 180, 250);
-        private Color colorBotonHover = Color.FromArgb(116, 199, 236);
-        private Color colorTexto = Color.White;
-        private Color colorTextoBoton = Color.FromArgb(30, 30, 46);
-        private Font fuenteTitulo = new Font("Times New Roman", 18, FontStyle.Bold);
-        private Font fuenteBoton = new Font("Times New Roman", 18, FontStyle.Bold);
-
-        private void EstilizarBoton(System.Windows.Forms.Button btn, string texto)
-        {
-            btn.FlatStyle = FlatStyle.Flat;                    // Quita el estilo 3D de Windows
-            btn.FlatAppearance.BorderSize = 0;                 // Sin borde
-            btn.BackColor = colorBoton;                        // Color de fondo
-            btn.ForeColor = colorTextoBoton;                   // Color del texto
-            btn.Text = texto;
-            btn.Cursor = Cursors.Hand;                         // Manita al pasar el mouse
-            btn.MouseEnter += (s, e) => btn.BackColor = colorBotonHover;
-            btn.MouseLeave += (s, e) => btn.BackColor = colorBoton;
-        }
-        private void AplicarEstilo()
-        {
-            this.BackColor = colorFondo;
-            this.Text = "Menú Principal";
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            EstilizarBoton(btnArchivo, "📁 Adjuntar Archivo");
-            EstilizarBoton(btnEnviar, "📧 Enviar Correo");
-            label1.Font = fuenteTitulo;
-            label1.ForeColor = colorTexto;
-            label1.AutoSize = true;
-            label2.Font = fuenteTitulo;
-            label2.ForeColor = colorTexto;
-            label2.AutoSize = true;
-            label3.Font = fuenteTitulo;
-            label3.ForeColor = colorTexto;
-            label3.AutoSize = true;
-            label4.Font = fuenteTitulo;
-            label4.ForeColor = colorTexto;
-            label4.AutoSize = true;
-            label5.Font = fuenteTitulo;
-            label5.ForeColor = colorTexto;
-            label5.AutoSize = true;
-            label6.Font = fuenteTitulo;
-            label6.ForeColor = colorTexto;
-            label6.AutoSize = true;
-
-        }
         public frmCorreo()
         {
             InitializeComponent();
             AplicarEstilo();
+        }
+        private void AplicarEstilo()
+        {
+            this.BackColor = Estilos.Fondo;
+            foreach (Control ctrl in this.Controls)
+            {
+                if (ctrl is Label lbl)
+                {
+                    lbl.ForeColor = Estilos.TextoClaro;
+                    lbl.Font = Estilos.FuenteBold;
+                }
+            }
+
+            Estilos.EstilizarTextBoxConPlaceholder(tbCorreo, "tucorreo@gmail.com");
+            Estilos.EstilizarTextBoxConPlaceholder(tbDestinatario, "destinatario@email.com");
+            Estilos.EstilizarTextBoxConPlaceholder(tbAsunto, "Escribe el asunto...");
+            Estilos.EstilizarTextBoxConPlaceholder(tbArchivo, "Ruta del archivo...");
+            Estilos.EstilizarTextBox(tbPassword);
+            Estilos.EstilizarTextBoxConPlaceholder(tbMensaje, "Escribe tu mensaje aquí...");
+            Estilos.EstilizarBoton(btnEnviar, "📧 Enviar Correo");
+            Estilos.EstilizarBoton(btnArchivo, "📎 Adjuntar Archivo");
         }
         private void EnviarCorreo()
         {

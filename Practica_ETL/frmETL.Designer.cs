@@ -47,7 +47,7 @@
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscar.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.btnBuscar.Location = new System.Drawing.Point(44, 48);
+            this.btnBuscar.Location = new System.Drawing.Point(4, 5);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(112, 34);
@@ -59,9 +59,10 @@
             // tbRuta
             // 
             this.tbRuta.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbRuta.Location = new System.Drawing.Point(332, 53);
+            this.tbRuta.Location = new System.Drawing.Point(292, 10);
             this.tbRuta.Margin = new System.Windows.Forms.Padding(4);
             this.tbRuta.Name = "tbRuta";
+            this.tbRuta.ReadOnly = true;
             this.tbRuta.Size = new System.Drawing.Size(439, 26);
             this.tbRuta.TabIndex = 1;
             // 
@@ -73,7 +74,7 @@
             this.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProceso.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProceso.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.btnProceso.Location = new System.Drawing.Point(332, 447);
+            this.btnProceso.Location = new System.Drawing.Point(292, 404);
             this.btnProceso.Margin = new System.Windows.Forms.Padding(4);
             this.btnProceso.Name = "btnProceso";
             this.btnProceso.Size = new System.Drawing.Size(112, 34);
@@ -93,7 +94,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(44, 90);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 47);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
@@ -103,10 +104,11 @@
             // tbPagina
             // 
             this.tbPagina.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPagina.Location = new System.Drawing.Point(662, 444);
+            this.tbPagina.Location = new System.Drawing.Point(551, 401);
             this.tbPagina.Margin = new System.Windows.Forms.Padding(4);
             this.tbPagina.Name = "tbPagina";
-            this.tbPagina.Size = new System.Drawing.Size(109, 26);
+            this.tbPagina.ReadOnly = true;
+            this.tbPagina.Size = new System.Drawing.Size(180, 26);
             this.tbPagina.TabIndex = 6;
             // 
             // btnPrev
@@ -117,7 +119,7 @@
             this.btnPrev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrev.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrev.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnPrev.Location = new System.Drawing.Point(44, 447);
+            this.btnPrev.Location = new System.Drawing.Point(4, 404);
             this.btnPrev.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(48, 34);
@@ -134,7 +136,7 @@
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNext.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnNext.Location = new System.Drawing.Point(108, 447);
+            this.btnNext.Location = new System.Drawing.Point(68, 404);
             this.btnNext.Margin = new System.Windows.Forms.Padding(4);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(48, 34);
@@ -151,7 +153,7 @@
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiar.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.Color.Snow;
-            this.btnLimpiar.Location = new System.Drawing.Point(635, 490);
+            this.btnLimpiar.Location = new System.Drawing.Point(422, 447);
             this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(136, 27);
@@ -166,7 +168,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(818, 530);
+            this.ClientSize = new System.Drawing.Size(737, 484);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrev);
