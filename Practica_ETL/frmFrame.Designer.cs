@@ -75,7 +75,8 @@
             this.pbVideo.Location = new System.Drawing.Point(343, 24);
             this.pbVideo.Margin = new System.Windows.Forms.Padding(4);
             this.pbVideo.Name = "pbVideo";
-            this.pbVideo.Size = new System.Drawing.Size(378, 317);
+            this.pbVideo.Size = new System.Drawing.Size(555, 392);
+            this.pbVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbVideo.TabIndex = 4;
             this.pbVideo.TabStop = false;
             // 
@@ -119,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(733, 354);
+            this.ClientSize = new System.Drawing.Size(911, 429);
             this.Controls.Add(this.btnCaptura);
             this.Controls.Add(this.btnActivar);
             this.Controls.Add(this.btnConsulta);
