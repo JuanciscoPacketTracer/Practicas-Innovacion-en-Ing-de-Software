@@ -34,6 +34,7 @@
             this.btnEnviarCorreo = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnReconocerTexto = new System.Windows.Forms.Button();
+            this.btnProductos = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnETL
@@ -49,7 +50,7 @@
             // 
             // btnFrame
             // 
-            this.btnFrame.Location = new System.Drawing.Point(501, 107);
+            this.btnFrame.Location = new System.Drawing.Point(80, 285);
             this.btnFrame.Margin = new System.Windows.Forms.Padding(4);
             this.btnFrame.Name = "btnFrame";
             this.btnFrame.Size = new System.Drawing.Size(308, 64);
@@ -60,7 +61,7 @@
             // 
             // btnEnviarCorreo
             // 
-            this.btnEnviarCorreo.Location = new System.Drawing.Point(80, 240);
+            this.btnEnviarCorreo.Location = new System.Drawing.Point(80, 195);
             this.btnEnviarCorreo.Margin = new System.Windows.Forms.Padding(4);
             this.btnEnviarCorreo.Name = "btnEnviarCorreo";
             this.btnEnviarCorreo.Size = new System.Drawing.Size(308, 64);
@@ -81,7 +82,7 @@
             // 
             // btnReconocerTexto
             // 
-            this.btnReconocerTexto.Location = new System.Drawing.Point(501, 240);
+            this.btnReconocerTexto.Location = new System.Drawing.Point(496, 107);
             this.btnReconocerTexto.Margin = new System.Windows.Forms.Padding(4);
             this.btnReconocerTexto.Name = "btnReconocerTexto";
             this.btnReconocerTexto.Size = new System.Drawing.Size(308, 64);
@@ -90,11 +91,23 @@
             this.btnReconocerTexto.UseVisualStyleBackColor = true;
             this.btnReconocerTexto.Click += new System.EventHandler(this.btnReconocerTexto_Click);
             // 
+            // btnProductos
+            // 
+            this.btnProductos.Location = new System.Drawing.Point(496, 195);
+            this.btnProductos.Margin = new System.Windows.Forms.Padding(4);
+            this.btnProductos.Name = "btnProductos";
+            this.btnProductos.Size = new System.Drawing.Size(308, 64);
+            this.btnProductos.TabIndex = 5;
+            this.btnProductos.Text = "Administrar Productos";
+            this.btnProductos.UseVisualStyleBackColor = true;
+            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(873, 375);
+            this.Controls.Add(this.btnProductos);
             this.Controls.Add(this.btnReconocerTexto);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.btnEnviarCorreo);
@@ -117,5 +130,6 @@
         private System.Windows.Forms.Button btnEnviarCorreo;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnReconocerTexto;
+        private System.Windows.Forms.Button btnProductos;
     }
 }

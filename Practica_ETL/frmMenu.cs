@@ -21,6 +21,7 @@ namespace Practica_ETL
             Estilos.EstilizarBoton(btnEnviarCorreo, "📧 Enviar Correos");
             Estilos.EstilizarBoton(btnETL, "⚙️ Proceso ETL");
             Estilos.EstilizarBoton(btnReconocerTexto, "🔍 Reconocer Texto");
+            Estilos.EstilizarBoton(btnProductos, "🛒 Productos");
         }
         public frmMenu()
         {
@@ -60,6 +61,12 @@ namespace Practica_ETL
         {
             frmReconocerTexto reconocerTexto = new frmReconocerTexto();
             reconocerTexto.Show();
+        }
+
+        private void btnProductos_Click(object sender, EventArgs e)
+        {
+            Productos productos = new Productos();
+            productos.Show();
         }
     }
 }
