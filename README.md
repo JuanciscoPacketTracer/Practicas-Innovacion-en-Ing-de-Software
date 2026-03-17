@@ -4,7 +4,7 @@ Aplicacion de windows forms .NET con practicas realizadas para la materia de Inn
 
 Docente: Alan Fernando Meza Cota
 
-formulario menu que lleva a 3 opciones
+formulario menu que lleva a 5 opciones
 
 Proceso ETL
 
@@ -21,3 +21,11 @@ Proceso Envio de Emails
 
 Formulario que utiliza MailKit y contraseñas de aplicaciones de gmail para, mediante textbox, llenar la informacion necesaria para enviar correos.
 Permite adjuntar archivos.
+
+Proceso Reconocimiento de texto
+
+Formulario que carga imagen y utilizando Tesseract reconoce el texto de la imagen, con la posibilidad de guardar el texto reconocido como archivo txt
+
+Proceso Generacion de codigo de barras y Crud de productos
+
+Formulario que utliza TabControl para mostrar operacion CRUD para manejar productos, permite imprimir un reporte de los productos donde se genera un codigo de barras a partir del codigo ID del producto
