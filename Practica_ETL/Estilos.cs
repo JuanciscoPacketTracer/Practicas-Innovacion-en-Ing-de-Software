@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Practica_ETL;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -136,6 +137,65 @@ namespace Practica_ETL
             lbl.ForeColor = TextoClaro;
             lbl.Font = esTitulo ? FuenteTitulo : FuenteBold;
             lbl.BackColor = Color.Transparent;
+        }
+        public static void EstilizarTabControl(TabControl tc)
+        {
+            tc.DrawMode = TabDrawMode.OwnerDrawFixed;
+            tc.SizeMode = TabSizeMode.Fixed;
+            tc.ItemSize = new Size(150, 40);
+            tc.Font = FuenteBold;
+            tc.Appearance = TabAppearance.FlatButtons;
+            tc.BackColor = Fondo;
+
+            foreach (TabPage tab in tc.TabPages)
+            {
+                tab.BackColor = Fondo;
+                tab.ForeColor = TextoClaro;
+                tab.BorderStyle = BorderStyle.None;
+            }
+
+            tc.DrawItem += (sender, e) =>
+            {
+                TabControl tabCtrl = (TabControl)sender;
+                TabPage page = tabCtrl.TabPages[e.Index];
+                bool seleccionada = (e.Index == tabCtrl.SelectedIndex);
+
+                Color fondoTab = seleccionada ? Acento : Superficie;
+                Color textoTab = seleccionada ? TextoOscuro : TextoClaro;
+
+                using (Brush fondoBrush = new SolidBrush(fondoTab))
+                {
+                    e.Graphics.FillRectangle(fondoBrush, e.Bounds);
+                }
+
+                if (seleccionada)
+                {
+                    using (Pen pen = new Pen(Acento, 3))
+                    {
+                        e.Graphics.DrawLine(pen,
+                            e.Bounds.Left, e.Bounds.Bottom - 2,
+                            e.Bounds.Right, e.Bounds.Bottom - 2);
+                    }
+                }
+
+                TextRenderer.DrawText(
+                    e.Graphics,
+                    page.Text,
+                    seleccionada ? FuenteBold : FuenteNormal,
+                    e.Bounds,
+                    textoTab,
+                    TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                );
+            };
+        }
+        public static void EstilizarCheckBox(CheckBox cb)
+        {
+            cb.ForeColor = TextoClaro;
+            cb.BackColor = Fondo; 
+            cb.Font = FuenteNormal;
+            cb.Cursor = Cursors.Hand;
+            cb.FlatStyle = FlatStyle.Standard;
+            cb.Padding = new Padding(3, 2, 3, 2);
         }
     }
 }

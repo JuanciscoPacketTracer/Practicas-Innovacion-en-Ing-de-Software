@@ -65,7 +65,7 @@ namespace Practica_ETL
 
         private void btnProductos_Click(object sender, EventArgs e)
         {
-            Productos productos = new Productos();
+            frmProductos productos = new frmProductos();
             productos.Show();
         }
     }
