@@ -145,6 +145,14 @@ namespace Practica_ETL
             Estilos.EstilizarLabel(label9, esTitulo: false);
             Estilos.EstilizarLabel(label10, esTitulo: false);
             Estilos.EstilizarLabel(label11, esTitulo: false);
+            Estilos.EstilizarLabel(lblMCodigo, esTitulo: false);
+            Estilos.EstilizarLabel(lblMDescripcion, esTitulo: false);
+            Estilos.EstilizarLabel(lblMPrecio, esTitulo: false);
+            Estilos.EstilizarDataGridView(dgMProductos);
+            Estilos.EstilizarPictureBox(pbMFoto);
+            Estilos.EstilizarBoton(btnPrev, "◀️");
+            Estilos.EstilizarBoton(btnNext, "▶️");
+            Estilos.EstilizarTextBox(tbPagina);
             Estilos.EstilizarTextBox(tbCodigo);
             Estilos.EstilizarTextBoxConPlaceholder(tbDescripcion, "Ingrese la descricion del producto");
             Estilos.EstilizarTextBox(tbPrecio);
@@ -282,38 +290,198 @@ namespace Practica_ETL
             listaProductos.Clear();
             foreach (DataGridViewRow row in dgProductos.Rows)
             {
-                if (!row.IsNewRow)
-                {
-                    listaProductos.Add(new ProductoEtiqueta
-                    {
+                if (row.IsNewRow) continue;
 
-                        Codigo = row.Cells[0].Value.ToString(),
-                        Nombre = row.Cells[1].Value.ToString(),
-                        Precio = row.Cells[2].Value.ToString(),
-                        Imagen = ObtenerImagenProducto(row.Cells[0].Value.ToString())
-                    });
-                }
+                string codigo = row.Cells["CodigoProducto"]?.Value?.ToString();
+                string nombre = row.Cells["DescripcionProducto"]?.Value?.ToString();
+                string precio = row.Cells["PrecioProducto"]?.Value?.ToString();
+
+                if (string.IsNullOrWhiteSpace(codigo) ||
+                    string.IsNullOrWhiteSpace(nombre) ||
+                    string.IsNullOrWhiteSpace(precio))
+                    continue;
+
+                listaProductos.Add(new ProductoEtiqueta
+                {
+                    Codigo = codigo,
+                    Nombre = nombre,
+                    Precio = precio,
+                    Imagen = ObtenerImagenProducto(codigo)
+                });
             }
 
             if (listaProductos.Count == 0)
             {
-                MessageBox.Show("No hay productos para imprimir.");
+                MessageBox.Show("No hay productos válidos para imprimir.");
                 return;
             }
 
-            indiceImpresion = 0;
             printDoc.DefaultPageSettings.Margins = new Margins(40, 40, 40, 40);
             printDoc.PrintPage -= PrintDoc_PrintPage;
             printDoc.PrintPage += PrintDoc_PrintPage;
+            // 2) Ask to save after preview
+            if (MessageBox.Show("¿Desea guardar el documento?", "Guardar",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+            // 1) Preview
+            indiceImpresion = 0;
+            using (PrintPreviewDialog vista = new PrintPreviewDialog())
+            {
+                vista.Document = printDoc;
+                vista.ShowDialog();
+            }
 
-            PrintPreviewDialog vista = new PrintPreviewDialog();
-            vista.Document = printDoc;
-            vista.ShowDialog();
+            
+
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "Archivo PDF (*.pdf)|*.pdf|Archivo TXT (*.txt)|*.txt";
+                sfd.FileName = "Etiquetas_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
+
+                if (sfd.ShowDialog() != DialogResult.OK)
+                    return;
+
+                string extension = Path.GetExtension(sfd.FileName).ToLowerInvariant();
+
+                if (extension == ".txt")
+                {
+                    ExportarEtiquetasTxt(sfd.FileName);
+                    MessageBox.Show("Archivo TXT generado correctamente.");
+                }
+                else
+                {
+                    indiceImpresion = 0; // reset before export print
+                    bool generado = ExportarEtiquetasPdfConMicrosoftPrintToPdf(sfd.FileName);
+                    if (generado)
+                        MessageBox.Show("Archivo PDF generado correctamente.");
+                    else
+                        MessageBox.Show("No se pudo generar PDF. Verifica que la impresora 'Microsoft Print to PDF' esté instalada.");
+                }
+            }
         }
 
-        private void frmProductos_Load(object sender, EventArgs e)
+        private void ExportarEtiquetasTxt(string rutaArchivo)
         {
+            var sb = new StringBuilder();
+            sb.AppendLine("LISTA DE ETIQUETAS");
+            sb.AppendLine(new string('-', 40));
 
+            foreach (var prod in listaProductos)
+            {
+                sb.AppendLine("Código: " + (prod.Codigo ?? ""));
+                sb.AppendLine("Descripción: " + (prod.Nombre ?? ""));
+                sb.AppendLine("Precio: $ " + (prod.Precio ?? ""));
+                sb.AppendLine(new string('-', 40));
+            }
+
+            File.WriteAllText(rutaArchivo, sb.ToString(), Encoding.UTF8);
+        }
+
+        private bool ExportarEtiquetasPdfConMicrosoftPrintToPdf(string rutaArchivo)
+        {
+            try
+            {
+                var printerSettings = new PrinterSettings
+                {
+                    PrinterName = "Microsoft Print to PDF",
+                    PrintToFile = true,
+                    PrintFileName = rutaArchivo
+                };
+
+                if (!printerSettings.IsValid)
+                    return false;
+
+                var oldSettings = printDoc.PrinterSettings;
+                var oldController = printDoc.PrintController;
+
+                indiceImpresion = 0;
+                printDoc.PrinterSettings = printerSettings;
+                printDoc.PrintController = new StandardPrintController();
+                printDoc.Print();
+
+                printDoc.PrintController = oldController;
+                printDoc.PrinterSettings = oldSettings;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        private int currentPage = 0;
+        private int pageSize = 10;
+        private int totalRows = 0;
+        private int totalPages = 0;
+        private readonly string connStr = "Server=127.0.0.1;Uid=root;Pwd=rootroot;Database=bdpractica;";
+        private async Task<int> GetTotalRowsAsync()
+        {
+            return await Task.Run(() =>
+            {
+                using (var conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM productos", conn))
+                    {
+                        return Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+            });
+        }
+
+        private async Task LoadPageAsync(int page)
+        {
+            btnNext.Enabled = btnPrev.Enabled = false;
+            int offset = page * pageSize;
+
+            DataTable dt = await Task.Run(() =>
+            {
+                using (var conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    string sql = "SELECT CodigoProducto, DescripcionProducto, PrecioProducto FROM productos ORDER BY CodigoProducto LIMIT @limit OFFSET @offset";
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@limit", pageSize);
+                        cmd.Parameters.AddWithValue("@offset", offset);
+                        using (var da = new MySqlDataAdapter(cmd))
+                        {
+                            var table = new DataTable();
+                            da.Fill(table);
+                            return table;
+                        }
+                    }
+                }
+            });
+
+            dgMProductos.DataSource = dt;
+
+            if (dgMProductos.Columns.Contains("CodigoProducto"))
+            {
+                dgMProductos.Columns["CodigoProducto"].Width = 60;
+                dgMProductos.Columns["CodigoProducto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            }
+            if (dgMProductos.Columns.Contains("DescripcionProducto"))
+            {
+                dgMProductos.Columns["DescripcionProducto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            if (dgMProductos.Columns.Contains("PrecioProducto"))
+            {
+                dgMProductos.Columns["PrecioProducto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            tbPagina.Text = $"Página {currentPage + 1} / {totalPages}";
+            btnNext.Enabled = (currentPage + 1) < totalPages;
+            btnPrev.Enabled = currentPage > 0;
+
+            if (dgMProductos.Rows.Count > 0)
+                dgMProductos.Rows[0].Selected = true;
+        }
+        private  async void frmProductos_Load(object sender, EventArgs e)
+        {
+            totalRows = await GetTotalRowsAsync();
+            totalPages = Math.Max(1, (totalRows + pageSize - 1) / pageSize);
+            currentPage = 0;
+            await LoadPageAsync(currentPage);
         }
 
         private void tbBuscarCodigo_KeyPress(object sender, KeyPressEventArgs e)
@@ -497,6 +665,76 @@ namespace Practica_ETL
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 pbAImagen.Image = Image.FromFile(ofd.FileName);
+            }
+        }
+
+        private async void dgMProductos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgMProductos.SelectedRows.Count == 0) return;
+
+            try
+            {
+                int cod = Convert.ToInt32(dgMProductos.SelectedRows[0].Cells["CodigoProducto"].Value);
+                string desc = dgMProductos.SelectedRows[0].Cells["DescripcionProducto"].Value?.ToString() ?? "";
+                decimal precio = Convert.ToDecimal(dgMProductos.SelectedRows[0].Cells["PrecioProducto"].Value);
+                lblMDescripcion.Text = $"📝 Descripcion: {desc}";
+                lblMCodigo.Text = $"🔢 Codigo: {cod}";
+                lblMPrecio.Text = $"💰 Precio:  {precio}";
+
+                byte[] imagenBytes = await Task.Run(() =>
+                {
+                    using (var conn = new MySqlConnection(connStr))
+                    {
+                        conn.Open();
+                        string sql = "SELECT ImagenProducto FROM productos WHERE CodigoProducto = @codigo";
+                        using (var cmd = new MySqlCommand(sql, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@codigo", cod);
+                            var result = cmd.ExecuteScalar();
+                            return result != DBNull.Value ? (byte[])result : null;
+                        }
+                    }
+                });
+
+                if (imagenBytes != null)
+                {
+                    using (MemoryStream ms = new MemoryStream(imagenBytes))
+                    {
+                        Image imgOriginal = Image.FromStream(ms);
+                        pbMFoto.Image?.Dispose();
+                        pbMFoto.Image = new Bitmap(imgOriginal);
+                        imgOriginal.Dispose();
+                    }
+                }
+                else
+                {
+                    pbMFoto.Image?.Dispose();
+                    pbMFoto.Image = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error cargando imagen: {ex.Message}");
+                pbMFoto.Image = null;
+            }
+        }
+
+        private async void btnPrev_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 0)
+            {
+                currentPage--;
+                await LoadPageAsync(currentPage);
+            }
+            
+        }
+
+        private async void btnNext_Click(object sender, EventArgs e)
+        {
+            if (currentPage + 1 < totalPages)
+            {
+                currentPage++;
+                await LoadPageAsync(currentPage);
             }
         }
     }

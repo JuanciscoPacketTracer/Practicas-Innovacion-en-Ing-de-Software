@@ -173,5 +173,25 @@ namespace Practica_ETL
         {
 
         }
+
+        private void pbFoto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgFotos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void lblIdFoto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNombreFoto_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

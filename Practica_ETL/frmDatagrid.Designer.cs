@@ -47,6 +47,7 @@
             this.pbFoto.Size = new System.Drawing.Size(383, 280);
             this.pbFoto.TabIndex = 1;
             this.pbFoto.TabStop = false;
+            this.pbFoto.Click += new System.EventHandler(this.pbFoto_Click);
             // 
             // dgFotos
             // 
@@ -55,6 +56,7 @@
             this.dgFotos.Name = "dgFotos";
             this.dgFotos.Size = new System.Drawing.Size(487, 391);
             this.dgFotos.TabIndex = 0;
+            this.dgFotos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFotos_CellContentClick);
             this.dgFotos.SelectionChanged += new System.EventHandler(this.dgFotos_SelectionChanged);
             // 
             // lblTitulo
@@ -119,6 +121,7 @@
             this.lblIdFoto.Size = new System.Drawing.Size(35, 13);
             this.lblIdFoto.TabIndex = 12;
             this.lblIdFoto.Text = "label2";
+            this.lblIdFoto.Click += new System.EventHandler(this.lblIdFoto_Click);
             // 
             // lblNombreFoto
             // 
@@ -128,6 +131,7 @@
             this.lblNombreFoto.Size = new System.Drawing.Size(12, 13);
             this.lblNombreFoto.TabIndex = 13;
             this.lblNombreFoto.Text = "x";
+            this.lblNombreFoto.Click += new System.EventHandler(this.lblNombreFoto_Click);
             // 
             // frmDatagrid
             // 
