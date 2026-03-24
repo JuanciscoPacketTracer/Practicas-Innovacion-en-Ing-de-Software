@@ -29,3 +29,7 @@ Formulario que carga imagen y utilizando Tesseract reconoce el texto de la image
 Proceso Generacion de codigo de barras y Crud de productos
 
 Formulario que utliza TabControl para mostrar operacion CRUD para manejar productos, permite imprimir un reporte de los productos donde se genera un codigo de barras a partir del codigo ID del producto
+
+Proceso Gestión de Empleados y Credencial de Identificación
+
+Formulario para registrar empleados con fotografía y generación de código QR. Permite imprimir una credencial de identificación con diseño profesional: encabezado degradado azul marino, foto con bordes redondeados, sección de datos con etiquetas y código QR integrado.
