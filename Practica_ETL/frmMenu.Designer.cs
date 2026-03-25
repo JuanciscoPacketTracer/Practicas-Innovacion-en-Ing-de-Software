@@ -35,7 +35,6 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnReconocerTexto = new System.Windows.Forms.Button();
             this.btnProductos = new System.Windows.Forms.Button();
-            this.btnQR = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnETL
@@ -103,23 +102,11 @@
             this.btnProductos.UseVisualStyleBackColor = true;
             this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
             // 
-            // btnQR
-            // 
-            this.btnQR.Location = new System.Drawing.Point(496, 285);
-            this.btnQR.Margin = new System.Windows.Forms.Padding(4);
-            this.btnQR.Name = "btnQR";
-            this.btnQR.Size = new System.Drawing.Size(308, 64);
-            this.btnQR.TabIndex = 6;
-            this.btnQR.Text = "QR de empleados";
-            this.btnQR.UseVisualStyleBackColor = true;
-            this.btnQR.Click += new System.EventHandler(this.btnQR_Click);
-            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(873, 375);
-            this.Controls.Add(this.btnQR);
             this.Controls.Add(this.btnProductos);
             this.Controls.Add(this.btnReconocerTexto);
             this.Controls.Add(this.lblTitulo);
@@ -144,6 +131,5 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnReconocerTexto;
         private System.Windows.Forms.Button btnProductos;
-        private System.Windows.Forms.Button btnQR;
     }
 }
