@@ -68,7 +68,7 @@
             this.btnEnviar.TabIndex = 2;
             this.btnEnviar.Text = "Enviar Correo";
             this.btnEnviar.UseVisualStyleBackColor = true;
-            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
+            this.btnEnviar.Click += new System.EventHandler(this.BtnEnviar_Click);
             // 
             // tbPassword
             // 
@@ -145,7 +145,7 @@
             this.btnArchivo.TabIndex = 11;
             this.btnArchivo.Text = "Adjuntar archivo";
             this.btnArchivo.UseVisualStyleBackColor = true;
-            this.btnArchivo.Click += new System.EventHandler(this.btnArchivo_Click);
+            this.btnArchivo.Click += new System.EventHandler(this.BtnArchivo_Click);
             // 
             // label6
             // 

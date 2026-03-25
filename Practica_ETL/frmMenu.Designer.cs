@@ -47,7 +47,7 @@
             this.btnETL.TabIndex = 0;
             this.btnETL.Text = "Proceso ETL";
             this.btnETL.UseVisualStyleBackColor = true;
-            this.btnETL.Click += new System.EventHandler(this.btnETL_Click);
+            this.btnETL.Click += new System.EventHandler(this.BtnETL_Click);
             // 
             // btnFrame
             // 
@@ -58,7 +58,7 @@
             this.btnFrame.TabIndex = 1;
             this.btnFrame.Text = "Captura de frame";
             this.btnFrame.UseVisualStyleBackColor = true;
-            this.btnFrame.Click += new System.EventHandler(this.btnFrame_Click);
+            this.btnFrame.Click += new System.EventHandler(this.BtnFrame_Click);
             // 
             // btnEnviarCorreo
             // 

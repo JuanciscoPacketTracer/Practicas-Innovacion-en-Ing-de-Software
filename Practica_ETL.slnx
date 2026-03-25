@@ -1,3 +1,11 @@
 <Solution>
-  <Project Path="Practica_ETL/Practica_ETL.csproj" Id="55453c09-4abc-482d-bbd1-c74baa688c84" />
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="Practica_ETL/Practica_ETL.csproj" Id="55453c09-4abc-482d-bbd1-c74baa688c84">
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
 </Solution>

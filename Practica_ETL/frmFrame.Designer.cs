@@ -48,7 +48,7 @@
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            this.btnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 
             // label1
             // 
@@ -90,7 +90,7 @@
             this.btnConsulta.TabIndex = 5;
             this.btnConsulta.Text = "Consulta base de datos";
             this.btnConsulta.UseVisualStyleBackColor = true;
-            this.btnConsulta.Click += new System.EventHandler(this.btnConsulta_Click);
+            this.btnConsulta.Click += new System.EventHandler(this.BtnConsulta_Click);
             // 
             // btnActivar
             // 
@@ -102,7 +102,7 @@
             this.btnActivar.TabIndex = 6;
             this.btnActivar.Text = "Activar Camara";
             this.btnActivar.UseVisualStyleBackColor = true;
-            this.btnActivar.Click += new System.EventHandler(this.btnActivar_Click);
+            this.btnActivar.Click += new System.EventHandler(this.BtnActivar_Click);
             // 
             // btnCaptura
             // 
@@ -114,7 +114,7 @@
             this.btnCaptura.TabIndex = 7;
             this.btnCaptura.Text = "Captura";
             this.btnCaptura.UseVisualStyleBackColor = true;
-            this.btnCaptura.Click += new System.EventHandler(this.btnCaptura_Click);
+            this.btnCaptura.Click += new System.EventHandler(this.BtnCaptura_Click);
             // 
             // frmFrame
             // 

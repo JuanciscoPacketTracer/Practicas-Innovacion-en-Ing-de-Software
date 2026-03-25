@@ -86,7 +86,7 @@ namespace Practica_ETL
         {
            
         }
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void BtnGuardar_Click(object sender, EventArgs e)
         {
             if (pbVideo.Image == null)
             {
@@ -129,18 +129,18 @@ namespace Practica_ETL
             }
         }
 
-        private void btnConsulta_Click(object sender, EventArgs e)
+        private void BtnConsulta_Click(object sender, EventArgs e)
         {
             frmDatagrid datagrid = new frmDatagrid();
             datagrid.Show();
         }
 
-        private void btnActivar_Click(object sender, EventArgs e)
+        private void BtnActivar_Click(object sender, EventArgs e)
         {
             ActivarCamara();
         }
 
-        private void btnCaptura_Click(object sender, EventArgs e)
+        private void BtnCaptura_Click(object sender, EventArgs e)
         {
             if (pbVideo.Image != null)
             {

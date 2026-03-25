@@ -11,7 +11,7 @@ namespace Practica_ETL
     public partial class frmDatagrid : Form
     {
         private int currentPage = 0;
-        private int pageSize = 10;
+        private readonly int pageSize = 10;
         private int totalRows = 0;
         private int totalPages = 0;
         private readonly string connStr = "Server=127.0.0.1;Uid=root;Pwd=rootroot;Database=bdpractica;";
@@ -96,6 +96,7 @@ namespace Practica_ETL
 
         private async void frmDatagrid_Load(object sender, EventArgs e)
         {
+
             totalRows = await GetTotalRowsAsync();
             totalPages = Math.Max(1, (totalRows + pageSize - 1) / pageSize);
             currentPage = 0;

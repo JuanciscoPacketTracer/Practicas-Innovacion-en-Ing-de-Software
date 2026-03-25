@@ -19,8 +19,8 @@ namespace Practica_ETL
 {
     public partial class frmProductos : Form
     {
-        PrintDocument printDoc = new PrintDocument();
-        List<ProductoEtiqueta> listaProductos = new List<ProductoEtiqueta>();
+        readonly PrintDocument printDoc = new PrintDocument();
+        readonly List<ProductoEtiqueta> listaProductos = new List<ProductoEtiqueta>();
         int indiceImpresion = 0;
         class ProductoEtiqueta
         {
@@ -166,6 +166,11 @@ namespace Practica_ETL
             Estilos.EstilizarBoton(btnAActualizar, "🔄 Actualizar");
             Estilos.EstilizarBoton(btnALimpiar, "🧹 Limpiar");
             Estilos.EstilizarBoton(btnABuscarImagen, "🖼️ Cargar Imagen");
+            Estilos.EstilizarBoton(btnPrev, "◀️");
+            Estilos.EstilizarBoton(btnNext, "▶️");
+            Estilos.EstilizarTextBox(tbPagina);
+            Estilos.EstilizarDataGridView(dgMProductos);
+            Estilos.EstilizarPictureBox(pbMFoto);
         }
 
 
@@ -190,7 +195,7 @@ namespace Practica_ETL
             }
         }
 
-        private void btnImagen_Click(object sender, EventArgs e)
+        private void BtnImagen_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.bmp";
@@ -219,7 +224,7 @@ namespace Practica_ETL
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void BtnGuardar_Click(object sender, EventArgs e)
         {
             if (pbImagen.Image == null)
             {
@@ -262,7 +267,7 @@ namespace Practica_ETL
             }
         }
 
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private void BtnBuscar_Click(object sender, EventArgs e)
         {
 
         }
@@ -277,7 +282,7 @@ namespace Practica_ETL
             tbICodigo.Focus();
         }
 
-        private void btnImprimir_Click(object sender, EventArgs e)
+        private void BtnImprimir_Click(object sender, EventArgs e)
         {
             listaProductos.Clear();
             foreach (DataGridViewRow row in dgProductos.Rows)
@@ -310,10 +315,17 @@ namespace Practica_ETL
             vista.Document = printDoc;
             vista.ShowDialog();
         }
-
-        private void frmProductos_Load(object sender, EventArgs e)
+        private int currentPage = 0;
+        private readonly int pageSize = 10;
+        private int totalRows = 0;
+        private int totalPages = 0;
+        private async void frmProductos_Load(object sender, EventArgs e)
         {
-
+      
+        totalRows = await GetTotalRowsAsync();
+        totalPages = Math.Max(1, (totalRows + pageSize - 1) / pageSize);
+            currentPage = 0;
+            await LoadPageAsync(currentPage);
         }
 
         private void tbBuscarCodigo_KeyPress(object sender, KeyPressEventArgs e)
@@ -378,7 +390,7 @@ namespace Practica_ETL
             }
         }
 
-        private void btnABuscarProducto_Click(object sender, EventArgs e)
+        private void BtnABuscarProducto_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tbACodigo.Text))
             {
@@ -433,7 +445,7 @@ namespace Practica_ETL
             }
         }
 
-        private void btnALimpiar_Click(object sender, EventArgs e)
+        private void BtnALimpiar_Click(object sender, EventArgs e)
         {
             tbACodigo.Text = "";
             tbADescripcion.Text = "";
@@ -442,7 +454,7 @@ namespace Practica_ETL
             tbACodigo.Focus();
         }
 
-        private void btnAActualizar_Click(object sender, EventArgs e)
+        private void BtnAActualizar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tbACodigo.Text) || string.IsNullOrWhiteSpace(tbADescripcion.Text) || string.IsNullOrWhiteSpace(tbAPrecio.Text))
             {
@@ -489,7 +501,7 @@ namespace Practica_ETL
             }
         }
 
-        private void btnABuscarImagen_Click(object sender, EventArgs e)
+        private void BtnABuscarImagen_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.bmp";
@@ -497,6 +509,110 @@ namespace Practica_ETL
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 pbAImagen.Image = Image.FromFile(ofd.FileName);
+            }
+        }
+
+
+
+        private void tbCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private async Task<int> GetTotalRowsAsync()
+        {
+            return await Task.Run(() =>
+            {
+                using (var conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM productos", conn))
+                    {
+                        return Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+            });     
+        }
+
+        private async Task LoadPageAsync(int page)
+        {
+            btnNext.Enabled = btnPrev.Enabled = false;
+            int offset = page * pageSize;
+
+            DataTable dt = await Task.Run(() =>
+            {
+                using (var conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    const string sql = @"SELECT 
+    CodigoProducto,
+    DescripcionProducto,
+    PrecioProducto
+FROM productos
+ORDER BY CodigoProducto
+LIMIT @limit OFFSET @offset";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@limit", pageSize);
+                        cmd.Parameters.AddWithValue("@offset", offset);
+
+                        using (var da = new MySqlDataAdapter(cmd))
+                        {
+                            var table = new DataTable();
+                            da.Fill(table);
+                            return table;
+                        }
+                    }
+                }
+            });
+
+            dgMProductos.DataSource = dt;
+
+            if (dgMProductos.Columns.Contains("CodigoProducto"))
+            {
+                dgMProductos.Columns["CodigoProducto"].HeaderText = "Código";
+                dgMProductos.Columns["CodigoProducto"].Width = 90;
+                dgMProductos.Columns["CodigoProducto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            }
+            if (dgMProductos.Columns.Contains("DescripcionProducto"))
+            {
+                dgMProductos.Columns["DescripcionProducto"].HeaderText = "Descripción";
+                dgMProductos.Columns["DescripcionProducto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            if (dgMProductos.Columns.Contains("PrecioProducto"))
+            {
+                dgMProductos.Columns["PrecioProducto"].HeaderText = "Precio";
+                dgMProductos.Columns["PrecioProducto"].Width = 80;
+                dgMProductos.Columns["PrecioProducto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dgMProductos.Columns["PrecioProducto"].DefaultCellStyle.Format = "N2";
+            }
+
+            tbPagina.Text = $"Página {currentPage + 1} / {totalPages}";
+            btnNext.Enabled = (currentPage + 1) < totalPages;
+            btnPrev.Enabled = currentPage > 0;
+
+            if (dgMProductos.Rows.Count > 0)
+            {
+                dgMProductos.ClearSelection();
+                dgMProductos.Rows[0].Selected = true;
+            }
+        }
+
+        private async void btnNext_Click_1(object sender, EventArgs e)
+        {
+            if (currentPage + 1 < totalPages)
+            {
+                currentPage++;
+                await LoadPageAsync(currentPage);
+            }
+        }
+
+        private async void btnPrev_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 0)
+            {
+                currentPage--;
+                await LoadPageAsync(currentPage);
             }
         }
 
@@ -509,33 +625,33 @@ namespace Practica_ETL
                 int cod = Convert.ToInt32(dgMProductos.SelectedRows[0].Cells["CodigoProducto"].Value);
                 string desc = dgMProductos.SelectedRows[0].Cells["DescripcionProducto"].Value?.ToString() ?? "";
                 decimal precio = Convert.ToDecimal(dgMProductos.SelectedRows[0].Cells["PrecioProducto"].Value);
+
                 lblMDescripcion.Text = $"📝 Descripcion: {desc}";
                 lblMCodigo.Text = $"🔢 Codigo: {cod}";
                 lblMPrecio.Text = $"💰 Precio:  {precio}";
 
                 byte[] imagenBytes = await Task.Run(() =>
                 {
-                    using (var conn = new MySqlConnection(connStr))
+                    using (var conn = new MySqlConnection(connectionString))
                     {
                         conn.Open();
-                        string sql = "SELECT ImagenProducto FROM productos WHERE CodigoProducto = @codigo";
+                        const string sql = "SELECT ImagenProducto FROM productos WHERE CodigoProducto = @codigo";
                         using (var cmd = new MySqlCommand(sql, conn))
                         {
                             cmd.Parameters.AddWithValue("@codigo", cod);
                             var result = cmd.ExecuteScalar();
-                            return result != DBNull.Value ? (byte[])result : null;
+                            return result != null && result != DBNull.Value ? (byte[])result : null;
                         }
                     }
                 });
 
                 if (imagenBytes != null)
                 {
-                    using (MemoryStream ms = new MemoryStream(imagenBytes))
+                    using (var ms = new MemoryStream(imagenBytes))
+                    using (var imgOriginal = Image.FromStream(ms))
                     {
-                        Image imgOriginal = Image.FromStream(ms);
                         pbMFoto.Image?.Dispose();
                         pbMFoto.Image = new Bitmap(imgOriginal);
-                        imgOriginal.Dispose();
                     }
                 }
                 else
@@ -549,30 +665,6 @@ namespace Practica_ETL
                 System.Diagnostics.Debug.WriteLine($"Error cargando imagen: {ex.Message}");
                 pbMFoto.Image = null;
             }
-        }
-
-        private async void btnPrev_Click(object sender, EventArgs e)
-        {
-            if (currentPage > 0)
-            {
-                currentPage--;
-                await LoadPageAsync(currentPage);
-            }
-            
-        }
-
-        private async void btnNext_Click(object sender, EventArgs e)
-        {
-            if (currentPage + 1 < totalPages)
-            {
-                currentPage++;
-                await LoadPageAsync(currentPage);
-            }
-        }
-
-        private void tbCodigo_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

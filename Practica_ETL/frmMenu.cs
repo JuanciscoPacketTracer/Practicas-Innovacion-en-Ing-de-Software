@@ -30,7 +30,7 @@ namespace Practica_ETL
             AplicarEstilo();
         }
 
-        private void btnFrame_Click(object sender, EventArgs e)
+        private void BtnFrame_Click(object sender, EventArgs e)
         {
             frmFrame frame = new frmFrame();
             frame.Show();
@@ -47,7 +47,7 @@ namespace Practica_ETL
 
         }
 
-        private void btnETL_Click(object sender, EventArgs e)
+        private void BtnETL_Click(object sender, EventArgs e)
         {
             frmETL ETL = new frmETL();
             ETL.Show();

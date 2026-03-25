@@ -1,15 +1,10 @@
 ﻿using System;
-using MailKit.Net.Smtp;
+using System.Drawing;
+using System.Windows.Forms;
 using MailKit.Security;
 using MimeKit;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using SmtpClient = MailKit.Net.Smtp.SmtpClient;
+using Tesseract;
 
 namespace Practica_ETL
 {
@@ -47,8 +42,10 @@ namespace Practica_ETL
             mensaje.From.Add(MailboxAddress.Parse(tbCorreo.Text));
             mensaje.To.Add(MailboxAddress.Parse(tbDestinatario.Text));
             mensaje.Subject = tbAsunto.Text;
-            var builder = new BodyBuilder();
-            builder.TextBody = tbMensaje.Text;
+            var builder = new BodyBuilder
+            {
+                TextBody = tbMensaje.Text
+            };
             if (!string.IsNullOrEmpty(ruta))
             {
                 builder.Attachments.Add(ruta);
@@ -68,8 +65,9 @@ namespace Practica_ETL
 
         }
         string ruta = "";
-        private void adjuntar_archivo()
+        private void Adjuntar_archivo()
         {             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string rutaArchivo = openFileDialog.FileName;
@@ -83,14 +81,44 @@ namespace Practica_ETL
 
         }
 
-        private void btnEnviar_Click(object sender, EventArgs e)
+        private void BtnEnviar_Click(object sender, EventArgs e)
         {
             EnviarCorreo();
         }
 
-        private void btnArchivo_Click(object sender, EventArgs e)
+        private void BtnArchivo_Click(object sender, EventArgs e)
         {
-            adjuntar_archivo();
+            Adjuntar_archivo();
+        }
+
+        private void BtnLeerImagen_Click(object sender, EventArgs e)
+        {
+            var idiomasDisponibles = "spa|eng|fra|deu|rus";
+            var dlg = new OpenFileDialog();
+            dlg.Filter = "Imagenes|*.jpg;*.jpeg;*.png;*.bmp|Todos los archivos|*.*";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                var rutaImagen = dlg.FileName;
+                var idioma = "spa";
+                if (idiomasDisponibles.Contains(idioma))
+                {
+                    var tessdataPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modelos");
+                    using (var engine = new TesseractEngine(tessdataPath, idioma, EngineMode.Default))
+                    {
+                        using (var img = Pix.LoadFromFile(rutaImagen))
+                        {
+                            using (var page = engine.Process(img))
+                            {
+                                tbMensaje.Text = page.GetText();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Idioma no soportado para OCR.");
+                }
+            }
         }
     }
 }
