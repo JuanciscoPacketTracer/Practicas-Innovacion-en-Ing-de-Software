@@ -667,5 +667,80 @@ namespace Practica_ETL
                 pbAImagen.Image = Image.FromFile(ofd.FileName);
             }
         }
+
+        private async void dgMProductos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgMProductos.SelectedRows.Count == 0) return;
+
+            try
+            {
+                int cod = Convert.ToInt32(dgMProductos.SelectedRows[0].Cells["CodigoProducto"].Value);
+                string desc = dgMProductos.SelectedRows[0].Cells["DescripcionProducto"].Value?.ToString() ?? "";
+                decimal precio = Convert.ToDecimal(dgMProductos.SelectedRows[0].Cells["PrecioProducto"].Value);
+                lblMDescripcion.Text = $"📝 Descripcion: {desc}";
+                lblMCodigo.Text = $"🔢 Codigo: {cod}";
+                lblMPrecio.Text = $"💰 Precio:  {precio}";
+
+                byte[] imagenBytes = await Task.Run(() =>
+                {
+                    using (var conn = new MySqlConnection(connStr))
+                    {
+                        conn.Open();
+                        string sql = "SELECT ImagenProducto FROM productos WHERE CodigoProducto = @codigo";
+                        using (var cmd = new MySqlCommand(sql, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@codigo", cod);
+                            var result = cmd.ExecuteScalar();
+                            return result != DBNull.Value ? (byte[])result : null;
+                        }
+                    }
+                });
+
+                if (imagenBytes != null)
+                {
+                    using (MemoryStream ms = new MemoryStream(imagenBytes))
+                    {
+                        Image imgOriginal = Image.FromStream(ms);
+                        pbMFoto.Image?.Dispose();
+                        pbMFoto.Image = new Bitmap(imgOriginal);
+                        imgOriginal.Dispose();
+                    }
+                }
+                else
+                {
+                    pbMFoto.Image?.Dispose();
+                    pbMFoto.Image = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error cargando imagen: {ex.Message}");
+                pbMFoto.Image = null;
+            }
+        }
+
+        private async void btnPrev_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 0)
+            {
+                currentPage--;
+                await LoadPageAsync(currentPage);
+            }
+            
+        }
+
+        private async void btnNext_Click(object sender, EventArgs e)
+        {
+            if (currentPage + 1 < totalPages)
+            {
+                currentPage++;
+                await LoadPageAsync(currentPage);
+            }
+        }
+
+        private void tbCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
