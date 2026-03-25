@@ -569,5 +569,10 @@ namespace Practica_ETL
                 await LoadPageAsync(currentPage);
             }
         }
+
+        private void tbCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

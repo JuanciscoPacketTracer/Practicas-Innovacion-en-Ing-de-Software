@@ -22,6 +22,7 @@ namespace Practica_ETL
             Estilos.EstilizarBoton(btnETL, "⚙️ Proceso ETL");
             Estilos.EstilizarBoton(btnReconocerTexto, "🔍 Reconocer Texto");
             Estilos.EstilizarBoton(btnProductos, "🛒 Productos");
+            Estilos.EstilizarBoton(btnQR, "🤵 QR de Empleados");
         }
         public frmMenu()
         {
@@ -67,6 +68,12 @@ namespace Practica_ETL
         {
             frmProductos productos = new frmProductos();
             productos.Show();
+        }
+
+        private void btnQR_Click(object sender, EventArgs e)
+        {
+            frmQR frmQR = new frmQR();
+            frmQR.Show();
         }
     }
 }
