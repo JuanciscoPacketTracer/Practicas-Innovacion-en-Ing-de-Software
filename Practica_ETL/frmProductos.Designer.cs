@@ -30,14 +30,6 @@
         {
             this.tcInicio = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.lblMPrecio = new System.Windows.Forms.Label();
-            this.lblMDescripcion = new System.Windows.Forms.Label();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.lblMCodigo = new System.Windows.Forms.Label();
-            this.dgMProductos = new System.Windows.Forms.DataGridView();
-            this.pbMFoto = new System.Windows.Forms.PictureBox();
-            this.btnPrev = new System.Windows.Forms.Button();
-            this.tbPagina = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.tbPrecio = new System.Windows.Forms.TextBox();
@@ -61,22 +53,19 @@
             this.tbIDescripcion = new System.Windows.Forms.TextBox();
             this.tbICodigo = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.btnAActualizar = new System.Windows.Forms.Button();
-            this.btnABuscarImagen = new System.Windows.Forms.Button();
-            this.btnALimpiar = new System.Windows.Forms.Button();
-            this.btnABuscarProducto = new System.Windows.Forms.Button();
-            this.pbAImagen = new System.Windows.Forms.PictureBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.tbADescripcion = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.tbACodigo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tbAPrecio = new System.Windows.Forms.TextBox();
+            this.tbADescripcion = new System.Windows.Forms.TextBox();
+            this.tbACodigo = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.pbAImagen = new System.Windows.Forms.PictureBox();
+            this.btnABuscarProducto = new System.Windows.Forms.Button();
+            this.btnALimpiar = new System.Windows.Forms.Button();
+            this.btnABuscarImagen = new System.Windows.Forms.Button();
+            this.btnAActualizar = new System.Windows.Forms.Button();
             this.tcInicio.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgMProductos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMFoto)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -100,14 +89,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.lblMPrecio);
-            this.tabPage1.Controls.Add(this.lblMDescripcion);
-            this.tabPage1.Controls.Add(this.btnNext);
-            this.tabPage1.Controls.Add(this.lblMCodigo);
-            this.tabPage1.Controls.Add(this.dgMProductos);
-            this.tabPage1.Controls.Add(this.pbMFoto);
-            this.tabPage1.Controls.Add(this.btnPrev);
-            this.tabPage1.Controls.Add(this.tbPagina);
             this.tabPage1.Location = new System.Drawing.Point(4, 28);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -115,94 +96,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // lblMPrecio
-            // 
-            this.lblMPrecio.AutoSize = true;
-            this.lblMPrecio.Location = new System.Drawing.Point(435, 304);
-            this.lblMPrecio.Name = "lblMPrecio";
-            this.lblMPrecio.Size = new System.Drawing.Size(45, 19);
-            this.lblMPrecio.TabIndex = 21;
-            this.lblMPrecio.Text = "label2";
-            // 
-            // lblMDescripcion
-            // 
-            this.lblMDescripcion.AutoSize = true;
-            this.lblMDescripcion.Location = new System.Drawing.Point(435, 259);
-            this.lblMDescripcion.Name = "lblMDescripcion";
-            this.lblMDescripcion.Size = new System.Drawing.Size(45, 19);
-            this.lblMDescripcion.TabIndex = 20;
-            this.lblMDescripcion.Text = "label2";
-            // 
-            // btnNext
-            // 
-            this.btnNext.AutoSize = true;
-            this.btnNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnNext.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnNext.Location = new System.Drawing.Point(368, 357);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(4);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(48, 34);
-            this.btnNext.TabIndex = 18;
-            this.btnNext.Text = "->";
-            this.btnNext.UseVisualStyleBackColor = false;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // lblMCodigo
-            // 
-            this.lblMCodigo.AutoSize = true;
-            this.lblMCodigo.Location = new System.Drawing.Point(435, 216);
-            this.lblMCodigo.Name = "lblMCodigo";
-            this.lblMCodigo.Size = new System.Drawing.Size(45, 19);
-            this.lblMCodigo.TabIndex = 19;
-            this.lblMCodigo.Text = "label2";
-            // 
-            // dgMProductos
-            // 
-            this.dgMProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgMProductos.Location = new System.Drawing.Point(6, 6);
-            this.dgMProductos.Name = "dgMProductos";
-            this.dgMProductos.Size = new System.Drawing.Size(410, 317);
-            this.dgMProductos.TabIndex = 14;
-            this.dgMProductos.SelectionChanged += new System.EventHandler(this.dgMProductos_SelectionChanged);
-            // 
-            // pbMFoto
-            // 
-            this.pbMFoto.Location = new System.Drawing.Point(439, 6);
-            this.pbMFoto.Name = "pbMFoto";
-            this.pbMFoto.Size = new System.Drawing.Size(244, 184);
-            this.pbMFoto.TabIndex = 15;
-            this.pbMFoto.TabStop = false;
-            // 
-            // btnPrev
-            // 
-            this.btnPrev.AutoSize = true;
-            this.btnPrev.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnPrev.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnPrev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrev.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrev.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnPrev.Location = new System.Drawing.Point(7, 352);
-            this.btnPrev.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(48, 34);
-            this.btnPrev.TabIndex = 17;
-            this.btnPrev.Text = "<-";
-            this.btnPrev.UseVisualStyleBackColor = false;
-            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
-            // 
-            // tbPagina
-            // 
-            this.tbPagina.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPagina.Location = new System.Drawing.Point(99, 357);
-            this.tbPagina.Margin = new System.Windows.Forms.Padding(4);
-            this.tbPagina.Name = "tbPagina";
-            this.tbPagina.ReadOnly = true;
-            this.tbPagina.Size = new System.Drawing.Size(180, 26);
-            this.tbPagina.TabIndex = 16;
             // 
             // tabPage2
             // 
@@ -448,65 +341,6 @@
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // btnAActualizar
-            // 
-            this.btnAActualizar.Location = new System.Drawing.Point(14, 330);
-            this.btnAActualizar.Name = "btnAActualizar";
-            this.btnAActualizar.Size = new System.Drawing.Size(163, 50);
-            this.btnAActualizar.TabIndex = 19;
-            this.btnAActualizar.Text = "Actualizar";
-            this.btnAActualizar.UseVisualStyleBackColor = true;
-            this.btnAActualizar.Click += new System.EventHandler(this.btnAActualizar_Click);
-            // 
-            // btnABuscarImagen
-            // 
-            this.btnABuscarImagen.Location = new System.Drawing.Point(523, 330);
-            this.btnABuscarImagen.Name = "btnABuscarImagen";
-            this.btnABuscarImagen.Size = new System.Drawing.Size(196, 50);
-            this.btnABuscarImagen.TabIndex = 17;
-            this.btnABuscarImagen.Text = "Buscar Imagen";
-            this.btnABuscarImagen.UseVisualStyleBackColor = true;
-            this.btnABuscarImagen.Click += new System.EventHandler(this.btnABuscarImagen_Click);
-            // 
-            // btnALimpiar
-            // 
-            this.btnALimpiar.Location = new System.Drawing.Point(247, 330);
-            this.btnALimpiar.Name = "btnALimpiar";
-            this.btnALimpiar.Size = new System.Drawing.Size(163, 50);
-            this.btnALimpiar.TabIndex = 16;
-            this.btnALimpiar.Text = "Limpiar";
-            this.btnALimpiar.UseVisualStyleBackColor = true;
-            this.btnALimpiar.Click += new System.EventHandler(this.btnALimpiar_Click);
-            // 
-            // btnABuscarProducto
-            // 
-            this.btnABuscarProducto.Location = new System.Drawing.Point(226, 33);
-            this.btnABuscarProducto.Name = "btnABuscarProducto";
-            this.btnABuscarProducto.Size = new System.Drawing.Size(209, 50);
-            this.btnABuscarProducto.TabIndex = 15;
-            this.btnABuscarProducto.Text = "Buscar Producto";
-            this.btnABuscarProducto.UseVisualStyleBackColor = true;
-            this.btnABuscarProducto.Click += new System.EventHandler(this.btnABuscarProducto_Click);
-            // 
-            // pbAImagen
-            // 
-            this.pbAImagen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbAImagen.Location = new System.Drawing.Point(441, 46);
-            this.pbAImagen.Name = "pbAImagen";
-            this.pbAImagen.Size = new System.Drawing.Size(333, 271);
-            this.pbAImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbAImagen.TabIndex = 4;
-            this.pbAImagen.TabStop = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(437, 13);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(56, 19);
-            this.label11.TabIndex = 14;
-            this.label11.Text = "Imagen:";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -516,14 +350,6 @@
             this.label8.TabIndex = 13;
             this.label8.Text = "Precio:";
             // 
-            // tbADescripcion
-            // 
-            this.tbADescripcion.Location = new System.Drawing.Point(14, 127);
-            this.tbADescripcion.MaxLength = 13;
-            this.tbADescripcion.Name = "tbADescripcion";
-            this.tbADescripcion.Size = new System.Drawing.Size(248, 26);
-            this.tbADescripcion.TabIndex = 9;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -532,14 +358,6 @@
             this.label9.Size = new System.Drawing.Size(84, 19);
             this.label9.TabIndex = 12;
             this.label9.Text = "Descripcion:";
-            // 
-            // tbACodigo
-            // 
-            this.tbACodigo.Location = new System.Drawing.Point(10, 46);
-            this.tbACodigo.MaxLength = 13;
-            this.tbACodigo.Name = "tbACodigo";
-            this.tbACodigo.Size = new System.Drawing.Size(203, 26);
-            this.tbACodigo.TabIndex = 8;
             // 
             // label10
             // 
@@ -558,6 +376,81 @@
             this.tbAPrecio.Size = new System.Drawing.Size(199, 26);
             this.tbAPrecio.TabIndex = 10;
             // 
+            // tbADescripcion
+            // 
+            this.tbADescripcion.Location = new System.Drawing.Point(14, 127);
+            this.tbADescripcion.MaxLength = 13;
+            this.tbADescripcion.Name = "tbADescripcion";
+            this.tbADescripcion.Size = new System.Drawing.Size(248, 26);
+            this.tbADescripcion.TabIndex = 9;
+            // 
+            // tbACodigo
+            // 
+            this.tbACodigo.Location = new System.Drawing.Point(10, 46);
+            this.tbACodigo.MaxLength = 13;
+            this.tbACodigo.Name = "tbACodigo";
+            this.tbACodigo.Size = new System.Drawing.Size(203, 26);
+            this.tbACodigo.TabIndex = 8;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(437, 13);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(56, 19);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "Imagen:";
+            // 
+            // pbAImagen
+            // 
+            this.pbAImagen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pbAImagen.Location = new System.Drawing.Point(441, 46);
+            this.pbAImagen.Name = "pbAImagen";
+            this.pbAImagen.Size = new System.Drawing.Size(333, 271);
+            this.pbAImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbAImagen.TabIndex = 4;
+            this.pbAImagen.TabStop = false;
+            // 
+            // btnABuscarProducto
+            // 
+            this.btnABuscarProducto.Location = new System.Drawing.Point(226, 33);
+            this.btnABuscarProducto.Name = "btnABuscarProducto";
+            this.btnABuscarProducto.Size = new System.Drawing.Size(209, 50);
+            this.btnABuscarProducto.TabIndex = 15;
+            this.btnABuscarProducto.Text = "Buscar Producto";
+            this.btnABuscarProducto.UseVisualStyleBackColor = true;
+            this.btnABuscarProducto.Click += new System.EventHandler(this.btnABuscarProducto_Click);
+            // 
+            // btnALimpiar
+            // 
+            this.btnALimpiar.Location = new System.Drawing.Point(249, 330);
+            this.btnALimpiar.Name = "btnALimpiar";
+            this.btnALimpiar.Size = new System.Drawing.Size(163, 50);
+            this.btnALimpiar.TabIndex = 16;
+            this.btnALimpiar.Text = "Limpiar";
+            this.btnALimpiar.UseVisualStyleBackColor = true;
+            this.btnALimpiar.Click += new System.EventHandler(this.btnALimpiar_Click);
+            // 
+            // btnABuscarImagen
+            // 
+            this.btnABuscarImagen.Location = new System.Drawing.Point(523, 330);
+            this.btnABuscarImagen.Name = "btnABuscarImagen";
+            this.btnABuscarImagen.Size = new System.Drawing.Size(196, 50);
+            this.btnABuscarImagen.TabIndex = 17;
+            this.btnABuscarImagen.Text = "Buscar Imagen";
+            this.btnABuscarImagen.UseVisualStyleBackColor = true;
+            this.btnABuscarImagen.Click += new System.EventHandler(this.btnABuscarImagen_Click);
+            // 
+            // btnAActualizar
+            // 
+            this.btnAActualizar.Location = new System.Drawing.Point(14, 330);
+            this.btnAActualizar.Name = "btnAActualizar";
+            this.btnAActualizar.Size = new System.Drawing.Size(163, 50);
+            this.btnAActualizar.TabIndex = 19;
+            this.btnAActualizar.Text = "Actualizar";
+            this.btnAActualizar.UseVisualStyleBackColor = true;
+            this.btnAActualizar.Click += new System.EventHandler(this.btnAActualizar_Click);
+            // 
             // frmProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -568,10 +461,6 @@
             this.Text = "Productos";
             this.Load += new System.EventHandler(this.frmProductos_Load);
             this.tcInicio.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgMProductos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMFoto)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
@@ -624,13 +513,5 @@
         private System.Windows.Forms.Button btnALimpiar;
         private System.Windows.Forms.Button btnABuscarProducto;
         private System.Windows.Forms.Button btnAActualizar;
-        private System.Windows.Forms.Label lblMPrecio;
-        private System.Windows.Forms.Label lblMDescripcion;
-        private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.Label lblMCodigo;
-        private System.Windows.Forms.DataGridView dgMProductos;
-        private System.Windows.Forms.PictureBox pbMFoto;
-        private System.Windows.Forms.Button btnPrev;
-        private System.Windows.Forms.TextBox tbPagina;
     }
 }
